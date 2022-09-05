@@ -3,7 +3,7 @@ const ClienteSQL1 = require( './contenedores/sql1.js');
 const dotenv = require( 'dotenv/config')
 const options1 = require( '../options/mysqlconn.js')
 const {getDao} = require('../factory/factory.js')
-const {getDaoDbInsert,getDaoDbSelect} = require('../factory/factoryDb.js')
+const {getDaoDbInsert,getDaoDbSelect,getDaoDbDelete,getDaoDbUpdate} = require('../factory/factoryDb.js')
 
 const url = process.env.URL;
 const contenedorMongo = new ContenedorMongoDb(url);
@@ -66,6 +66,14 @@ async function listar(tabla){
     let dto= getDaoDbSelect(tabla);
     return dto1(await dto);
 }
+async function Eliminar(data,tabla){
+    let dto= getDaoDbDelete(data,tabla);
+    await dto;
+}
+async function Actualizar(data,id,tabla){
+    let dto= getDaoDbUpdate(data,id,tabla);
+    await dto;
+}
 
 
-module.exports={conectar,getById,getByNombre,deleteById,putId,putUsuarios,insertarUsuarios,insertar,listar}
+module.exports={conectar,getById,getByNombre,deleteById,putId,putUsuarios,insertarUsuarios,insertar,listar,Eliminar,Actualizar}

@@ -29,4 +29,22 @@ let getDaoDbSelect = function(opcion){
     } 
     return dao;
 }
-module.exports={getDaoDbInsert,getDaoDbSelect};
+let getDaoDbDelete = function(data,opcion){
+    switch (opcion) {
+        case 'Productos':
+            dao = new ClienteSQL1(options1);
+            dao= dao.borrarProducto(data);
+            break
+    } 
+    return dao;
+}
+let getDaoDbUpdate = function(data,id,opcion){
+    switch (opcion) {
+        case 'Productos':
+            dao = new ClienteSQL1(options1);
+            dao= dao.actualizarProducto(data,id);
+            break
+    } 
+    return dao;
+}
+module.exports={getDaoDbInsert,getDaoDbSelect,getDaoDbDelete,getDaoDbUpdate};

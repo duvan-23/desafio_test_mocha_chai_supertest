@@ -22,7 +22,13 @@ let ClienteSQL1 =class {
     listarProductos() {
         return this.knex('productos').select('*');
     }
+    borrarProducto(id) {
+        return this.knex.from('productos').where('id', id).del();
+    }
 
+    actualizarProducto(data, id) {
+        return this.knex.from('productos').where('id', id).update(data);
+    }
     close() {
         this.knex.destroy()
     }

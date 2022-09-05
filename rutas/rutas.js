@@ -1,5 +1,5 @@
 const faker  = require( '@faker-js/faker');
-const {login,faillogin,logout,info,infozip,infodebug,randoms,postOrigen,origen,failregister,register,registerVery,loginVery,deserializeUser,connection,nodefinida} = require("../controlador/controlador.js");
+const {login,faillogin,logout,info,infozip,infodebug,randoms,postOrigen,origen,failregister,register,registerVery,loginVery,deserializeUser,connection,nodefinida,productos,productosinsert,productosdelete,productosupdate} = require("../controlador/controlador.js");
 const util = require( 'util');
 const dotenv = require( 'dotenv/config')
 faker.locale = 'es';
@@ -24,7 +24,7 @@ const parseArgs = require( 'minimist');
 const cluster = require( 'cluster');
 const os = require( 'os');
 const compression = require('compression');
-const logger = require( '../logger.js');
+const logger = require( '../scripts/logger.js');
 
 const app = express.Router();
 
@@ -63,6 +63,18 @@ app.get('/faillogin', compression(), async(req, res) => {
 
 app.get('/logout', compression(), async(req, res) => {
     await logout(req,res);
+})
+app.get('/productos', compression(), async(req, res) => {
+    await productos(req,res);
+})
+app.post('/productos', compression(), async(req, res) => {
+    await productosinsert(req,res);
+})
+app.delete('/productos', compression(), async(req, res) => {
+    await productosdelete(req,res);
+})
+app.put('/productos', compression(), async(req, res) => {
+    await productosupdate(req,res);
 })
 
 

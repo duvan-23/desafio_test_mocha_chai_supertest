@@ -1,4 +1,4 @@
-const {conectar,getById,getByNombre,deleteById,putId,putUsuarios,insertarUsuarios,listar,insertar} = require( '../persistencia/persistencia.js');
+const {conectar,getById,getByNombre,deleteById,putId,putUsuarios,insertarUsuarios,listar,insertar,Eliminar,Actualizar} = require( '../persistencia/persistencia.js');
 const PrimeraConexion = require( './singleton.js');
 
 async function conectarse() {
@@ -25,4 +25,10 @@ async function mostrarProductos() {
 async function grabarProductos(data) {
     await insertar(data,"Productos");
 }
-module.exports={conectarse,actualizarUsuarios,getNombre,agregarUsuarios,mostrarMensajes,grabarMensajes,mostrarProductos,grabarProductos}
+async function borrarProductos(data) {
+    await Eliminar(data,"Productos");
+}
+async function actualizarProductos(data,id) {
+    await Actualizar(data,id,"Productos");
+}
+module.exports={conectarse,actualizarUsuarios,getNombre,agregarUsuarios,mostrarMensajes,grabarMensajes,mostrarProductos,grabarProductos,borrarProductos,actualizarProductos}

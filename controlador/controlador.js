@@ -1,4 +1,4 @@
-const logger = require( '../logger.js');
+const logger = require( '../scripts/logger.js');
 const services = require( '../negocio/negocio.js');
 const { fork } = require( 'child_process');
 const bcrypt = require( 'bcrypt');
@@ -122,6 +122,24 @@ const register = async (req, res) => {
     const { url, method } = req;
     logger.info(`Ruta ${url}, Metodo ${method}`);
     res.render('./views/register');
+}
+const productos = async (req, res) => {
+    res.send(await services.mostrarProductos());
+}
+const productosinsert = async (req, res) => {
+    const {data} = req.body;
+    await services.grabarProductos(data);
+    res.send("Agrego producto");
+}
+const productosdelete = async (req, res) => {
+    const {data} = req.body;
+    await services.borrarProductos(data);
+    res.send("Borro producto");
+}
+const productosupdate = async (req, res) => {
+    const {data,id} = req.body;
+    await services.actualizarProductos(data,id);
+    res.send("Actualizo producto");
 }
 const registerVery = async (req, username, password, done) => {
     const { direccion } = req.body
@@ -262,4 +280,4 @@ const nodefinida=async(req, res) =>{
     res.send(`Ruta ${method} ${url} no implementada`)
 }
 
-module.exports={login,logout,info,faillogin,infozip,infodebug,randoms,postOrigen,origen,failregister,register,registerVery,loginVery,deserializeUser,connection,nodefinida};
+module.exports={login,logout,info,faillogin,infozip,infodebug,randoms,postOrigen,origen,failregister,register,registerVery,loginVery,deserializeUser,connection,nodefinida,productos,productosinsert,productosdelete,productosupdate};
